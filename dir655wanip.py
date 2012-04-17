@@ -37,10 +37,10 @@ def exit_with_message(message):
   sys.exit(1)
 
 
-def read_config():
+def read_config(cf = CONFIG_FILE):
   # maybe the config file should be a command line arg or env variable
   try:
-    with open(CONFIG_FILE, 'r') as config_file:
+    with open(cf, 'r') as config_file:
       config = config_file.readline().strip().split(';')
 
       if len(config) != 3:
@@ -55,7 +55,7 @@ def read_config():
       return config
 
   except IOError as e:
-    exit_with_message('missing config file: ' + CONFIG_FILE)
+    exit_with_message('missing config file: ' + cf)
 
 
 def get_ip(config):
@@ -65,15 +65,14 @@ def get_ip(config):
 
   resp = requests.post(request_url, auth=HTTPBasicAuth(username, password), data=REQUEST_MESSAGE)
   soup = Soup(resp.text)
-  #print soup.prettify()
 
   ip_addr = soup.find('ipaddress')
-  print ip_addr.contents[0]
+  return ip_addr.contents[0]
 
   
 def main():
  config = read_config()
- get_ip(config)
+ print get_ip(config)
 
 
 if __name__ == "__main__":
