@@ -36,6 +36,7 @@ def exit_with_message(message):
   print message
   sys.exit(1)
 
+
 def read_config():
   # maybe the config file should be a command line arg or env variable
   try:
@@ -64,14 +65,16 @@ def get_ip(config):
 
   resp = requests.post(request_url, auth=HTTPBasicAuth(username, password), data=REQUEST_MESSAGE)
   soup = Soup(resp.text)
-  ip_addr = soup.find('ipaddress')
+  #print soup.prettify()
 
+  ip_addr = soup.find('ipaddress')
   print ip_addr.contents[0]
 
   
 def main():
  config = read_config()
  get_ip(config)
+
 
 if __name__ == "__main__":
   main()
