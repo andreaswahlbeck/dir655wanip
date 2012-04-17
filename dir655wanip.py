@@ -54,7 +54,7 @@ def read_config():
       return config
 
   except IOError as e:
-    exit_with_message('missing config file: ', CONFIG_FILE)
+    exit_with_message('missing config file: ' + CONFIG_FILE)
 
 
 def get_ip(config):
