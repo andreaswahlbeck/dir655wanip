@@ -37,7 +37,7 @@ def exit_with_message(message):
   sys.exit(1)
 
 
-def read_config(cf = CONFIG_FILE):
+def read_router_config(cf = CONFIG_FILE):
   # maybe the config file should be a command line arg or env variable
   try:
     with open(cf, 'r') as config_file:
@@ -58,7 +58,7 @@ def read_config(cf = CONFIG_FILE):
     exit_with_message('missing config file: ' + cf)
 
 
-def get_ip(config):
+def get_router_wan_ip(config):
   username = config[0]
   password = config[1]
   request_url = config[2]
@@ -69,10 +69,10 @@ def get_ip(config):
   ip_addr = soup.find('ipaddress')
   return ip_addr.contents[0]
 
-  
+
 def main():
- config = read_config()
- print get_ip(config)
+  config = read_router_config()
+  print get_router_wan_ip(config)
 
 
 if __name__ == "__main__":

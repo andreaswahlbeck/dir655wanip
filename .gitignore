@@ -1,2 +1,4 @@
 .dir655wanip_config
 .ftp_config
+.current*
+*.pyc
